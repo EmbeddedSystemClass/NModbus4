@@ -22,8 +22,8 @@ namespace MySample
             {
                 //ModbusTcpMasterReadInputs();
                 //SimplePerfTest();
-                //ModbusSerialRtuMasterWriteRegisters();
-                //ModbusSerialAsciiMasterReadRegisters();
+                ModbusSerialRtuMasterWriteRegisters();
+                ModbusSerialAsciiMasterReadRegisters();
                 //ModbusTcpMasterReadInputs();				
                 //StartModbusAsciiSlave();
                 //ModbusTcpMasterReadInputsFromModbusSlave();
@@ -45,7 +45,7 @@ namespace MySample
         /// </summary>
         public static void ModbusSerialRtuMasterWriteRegisters()
         {
-            using (SerialPort port = new SerialPort("COM1"))
+            using (SerialPort port = new SerialPort("COM16"))
             {
                 // configure serial port
                 port.BaudRate = 9600;
@@ -59,7 +59,7 @@ namespace MySample
 
                 byte slaveId = 1;
                 ushort startAddress = 100;
-                ushort[] registers = new ushort[] { 1, 2, 3 };
+                ushort[] registers = new ushort[] { 10, 20, 30 };
 
                 // write three registers
                 master.WriteMultipleRegisters(slaveId, startAddress, registers);
@@ -71,7 +71,7 @@ namespace MySample
         /// </summary>
         public static void ModbusSerialAsciiMasterReadRegisters()
         {
-            using (SerialPort port = new SerialPort("COM1"))
+            using (SerialPort port = new SerialPort("COM16"))
             {
                 // configure serial port
                 port.BaudRate = 9600;
@@ -85,7 +85,7 @@ namespace MySample
 
                 byte slaveId = 1;
                 ushort startAddress = 1;
-                ushort numRegisters = 5;
+                ushort numRegisters = 3;
 
                 // read five registers		
                 ushort[] registers = master.ReadHoldingRegisters(slaveId, startAddress, numRegisters);
